@@ -23,6 +23,8 @@ Usage
 	
 	
     def run(message):
+        """ This function is executed upon receiving the 'SignIn' event """
+
         # unsubscribe from the SignIn event
         scrolls.unsubscribe('SignIn')
 
@@ -36,12 +38,16 @@ Usage
 
 
     def library_view(message):
+        """ This function is executed upon receiving the 'LibraryView' event """
+
         # unsubscribe from the LibraryView event
         scrolls.unsubscribe('LibraryView')
         print message
 
 
     def deck(message):
+        """ This function is executed upon receiving the 'DeckCards' event """
+
         # unsubscribe from the DeckCards event
         scrolls.unsubscribe('DeckCards')
         print message
