@@ -123,13 +123,14 @@ U9G7XhpBLfmQx0Esx5tJbYM0GR9Ww4XeXj3xZZBL39MciohrFurBENTFtrlu0EtM
         while (1):
             # read data from the buffer
             data = self.socket.recv(self._socket_recv)
-
             if not data:
                 # no more data being transmitted
+                stream_data = ''
                 break
             else:
                 # append data to the response
                 stream_data += data
+
                 try:
                     # line breaks means we are handling multiple responses
                     if stream_data.find("\n\n"):
@@ -140,6 +141,12 @@ U9G7XhpBLfmQx0Esx5tJbYM0GR9Ww4XeXj3xZZBL39MciohrFurBENTFtrlu0EtM
 
                             # we have a response, add it to the queue
                             self.queue.put(data_json)
+
+                            # remove the line from stream data
+                            stream_data = stream_data.replace(stream_data_line + "\n\n", '')
+
+                    # we've processed the available message, reset stream_data
+                    stream_data = ''
                 except:
                     # invalid json, incomplete data
                     pass
