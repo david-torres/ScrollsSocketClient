@@ -9,10 +9,9 @@ This project is a multi-threaded, event-based socket client for talking to the S
 Prerequisites
 ===============
 
-Install PyCrypto
+Install Requests
 
-	pip install pycrypto
-
+	pip install requests
 
 
 Usage
@@ -24,11 +23,11 @@ Usage
     password = 'password'
 
 
-    def run(message):
-        """ This function is executed upon receiving the 'SignIn' event """
+    def connect(message):
+        """ This function is executed upon receiving the 'FirstConnect' event """
 
-        # unsubscribe from the SignIn event
-        scrolls.unsubscribe('SignIn')
+        # unsubscribe from the FirstConnect event
+        scrolls.unsubscribe('FirstConnect')
 
         # subscribe to the OverallStats event with function overall_stats()
         scrolls.subscribe('OverallStats', overall_stats)
@@ -47,8 +46,8 @@ Usage
     # give the client our username/password
     scrolls = ScrollsSocketClient(email, password)
 
-    # subscribe to the SignIn event with function run()
-    scrolls.subscribe('SignIn', run)
+    # subscribe to the FirstConnect event with function run()
+    scrolls.subscribe('FirstConnect', connect)
 
     # login to the server
     scrolls.login()
@@ -59,3 +58,9 @@ Commands
 =========
 
 See [COMMANDS.md](COMMANDS.md)
+
+
+In-depth Example
+=================
+
+For a full-featured example of how you can make a bot using this client, see [PriceBot](https://github.com/david-torres/PriceBot)

@@ -7,11 +7,13 @@ from ScrollsSocketClient import ScrollsSocketClient
 
 email = 'user@example.com'
 password = 'password'
-room = 'detour_'
+room = 'chatlog'
 
 
-def run(message):
-    """ This function is executed upon receiving the 'SignIn' event """
+def connect(message):
+    """ This function is executed upon receiving the 'FirstConnect' event """
+
+    scrolls.send({'msg': 'JoinLobby'})
 
     # subscribe to the RoomEnter event with function room_enter()
     scrolls.subscribe('RoomEnter', room_enter)
@@ -47,8 +49,8 @@ def room_enter(message):
 # give the client our username/password
 scrolls = ScrollsSocketClient(email, password)
 
-# subscribe to the SignIn event with function run()
-scrolls.subscribe('SignIn', run)
+# subscribe to the FirstConnect event with function connect()
+scrolls.subscribe('FirstConnect', connect)
 
 # login to the server
 scrolls.login()

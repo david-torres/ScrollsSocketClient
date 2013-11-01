@@ -10,11 +10,13 @@ password = 'password'
 deck = 'Growth Preconstructed'
 
 
-def run(message):
-    """ This function is executed upon receiving the 'SignIn' event """
+def connect(message):
+    """ This function is executed upon receiving the 'FirstConnect' event """
+
+    scrolls.send({'msg': 'JoinLobby'})
 
     # unsubscribe from the SignIn event
-    scrolls.unsubscribe('SignIn')
+    scrolls.unsubscribe('FirstConnect')
 
     # subscribe to the LibraryView event with function library_view()
     scrolls.subscribe('LibraryView', library_view)
@@ -48,8 +50,8 @@ def deck_view(message):
 # give the client our username/password
 scrolls = ScrollsSocketClient(email, password)
 
-# subscribe to the SignIn event with function run()
-scrolls.subscribe('SignIn', run)
+# subscribe to the SignIn event with function connect()
+scrolls.subscribe('FirstConnect', connect)
 
 # login to the server
 scrolls.login()
