@@ -44,7 +44,7 @@ Usage
     # give the client our username/password
     scrolls = ScrollsSocketClient(email, password)
 
-    # subscribe to the FirstConnect event with function run()
+    # subscribe to the FirstConnect event with function connect()
     scrolls.subscribe('FirstConnect', connect)
 
     # login to the server
@@ -62,3 +62,8 @@ In-depth Example
 =================
 
 For a full-featured example of how you can make a bot using this client, see [PriceBot](https://github.com/david-torres/PriceBot)
+
+
+Known Issues
+=============
+This has never handled disconnects very well. If you know anything about sockets, please help me fix this.
